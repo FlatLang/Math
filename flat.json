@@ -1,0 +1,19 @@
+{
+  "name": "Math",
+  "version": "0.1.0",
+  "description": "Flat Math Library",
+  "author": "Braden Steffaniak",
+  "license": "ISC",
+  "scripts": {},
+  "main": {
+    "source": "src",
+    "dependencies": {}
+  },
+  "test": {
+    "mainClass": "flatlang/http/Math_TestSuite",
+    "source": "src",
+    "dependencies": {
+      "github:FlatLang/Nest": "master"
+    }
+  }
+}
