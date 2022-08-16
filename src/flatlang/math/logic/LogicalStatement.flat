@@ -6,7 +6,7 @@ class LogicalStatement extends Statement {
     StatementComponent[] components
 
     public construct(private String statement) {
-        components = new Array()
+        components = Array()
     }
 
     public toString() => statement

@@ -41,7 +41,7 @@ class NumericOperation extends NumericOperand<Object> {
 
         // if (type2 != OPERATOR) {
         //     if (type1 == OPERATOR)
-        //         throw new InvalidNumericStatementException("Missing left hand operand in operation '#operation'")
+        //         throw InvalidNumericStatementException("Missing left hand operand in operation '#operation'")
 
         //     rh = op
         //     op = "*"
@@ -63,9 +63,9 @@ class NumericOperation extends NumericOperand<Object> {
         NumericOperand rightOperator = decodeOperand(right)
 
         if (!left) {
-            throw new Exception("Left operand '#left' is invalid")
+            throw Exception("Left operand '#left' is invalid")
         } else if (!right) {
-            throw new Exception("Right operand '#right' is invalid")
+            throw Exception("Right operand '#right' is invalid")
         }
 
         this(leftOperand, operator, rightOperand)
@@ -132,7 +132,7 @@ class NumericOperation extends NumericOperand<Object> {
 
         minIndex = nextNonWhitespaceIndex(str, minIndex - 1, -1) + 1
 
-        return new Tuple2(new Bounds(start, minIndex), index)
+        return Tuple2(Bounds(start, minIndex), index)
     }
 
     static nextOperator(String str, Int start) -> Int {

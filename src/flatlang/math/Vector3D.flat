@@ -15,5 +15,5 @@ class Vector3D extends Vector {
     }
 
     public crossProduct(Vector3D other) =>
-        new Vector3D(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x)
+        Vector3D(y * other.z - z * other.y, z * other.x - x * other.z, x * other.y - y * other.x)
 }

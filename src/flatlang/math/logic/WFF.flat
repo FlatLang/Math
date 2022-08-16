@@ -12,7 +12,7 @@ class WFF {
     public construct(private var String wff, private StatementLetter[] letters) {
         wff = wff.trim()
 
-        hypotheses = new Array()
+        hypotheses = Array()
 
         decodeFormula()
     }
@@ -21,7 +21,7 @@ class WFF {
         StatementGroup<Conclusion> conclusionGroup = searchForConclusion(wff)
 
         if (!conclusionGroup) {
-            throw new InvalidFormulaException("No valid conclusion found")
+            throw InvalidFormulaException("No valid conclusion found")
         }
 
         Conclusion conclusion = conclusionGroup.statement
@@ -56,16 +56,16 @@ class WFF {
         }
 
         let conclusionStart = nextNonWhitespaceIndex(wff, index + 2, 1)
-        let bounds = new Bounds(conclusionStart, wff.count)
-        let conclusion = new Conclusion(bounds.extractString(wff))
+        let bounds = Bounds(conclusionStart, wff.count)
+        let conclusion = Conclusion(bounds.extractString(wff))
 
         bounds.start = nextNonWhitespaceIndex(wff, index - 1, -1) + 1
 
-        return new StatementGroup<Conclusion>(conclusion, bounds)
+        return StatementGroup<Conclusion>(conclusion, bounds)
     }
 
     decodeHypotheses(String wff) -> StatementGroup<Hypothesis>[] {
-        let list = new StatementGroup<Hypothesis>[]
+        let list = StatementGroup<Hypothesis>[]
 
         var Int next = 0
         var Int prev = 0
@@ -89,10 +89,10 @@ class WFF {
     }
 
     generateHypothesis(String wff, Int start, Int end) -> StatementGroup<Hypothesis> {
-        let bounds = new Bounds(start, end)
-        let h = new Hypothesis(bounds.extractString(wff))
+        let bounds = Bounds(start, end)
+        let h = Hypothesis(bounds.extractString(wff))
 
-        return new StatementGroup<Hypothesis>(h, bounds)
+        return StatementGroup<Hypothesis>(h, bounds)
     }
 
     searchForStatement(String wff) -> StatementGroup<Statement> => null {}

@@ -44,7 +44,7 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
     public construct(Int order) => this(order, order)
     public construct(Int rows, Int cols) {
         if (rows <= 0 || cols <= 0)
-            throw new InvalidArgumentException("Invalid matrix size #{rows}x#{cols}.
+            throw InvalidArgumentException("Invalid matrix size #{rows}x#{cols}.
                                                 The number of rows and columns must both be positive.")
 
         this(new Double[rows][cols])
@@ -52,10 +52,10 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
 
     public construct(private Double[][] data) {
         if (!data || data.count == 0)
-            throw new InvalidArgumentException("Matrix size must be greater than 0 rows and columns")
+            throw InvalidArgumentException("Matrix size must be greater than 0 rows and columns")
     }
 
-    public clone() => new Matrix(rows, cols).add(this)
+    public clone() => Matrix(rows, cols).add(this)
 
     public static identity(Int order) -> Matrix {
         let data = new Double[order][order]
@@ -64,12 +64,12 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
             data[i][i] = 1
         }
 
-        return new Matrix(data)
+        return Matrix(data)
     }
 
     public inverse() -> Matrix {
         if (!isSquare)
-            throw new InvalidOperationException("Cannot take the inverse of a non-square matrix")
+            throw InvalidOperationException("Cannot take the inverse of a non-square matrix")
 
         let i = identity(rows)
         let current = clone()
@@ -124,8 +124,8 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
     public add(Matrix other, Bool allowUnequalDimensions = false) -> Matrix {
         if (!allowUnequalDimensions) checkUnequalDimensions(other)
 
-        //return new Matrix(data.zip(other, { _.zip(_, { _ + _ }) }))
-        var result = new Matrix(rows, cols)
+        //return Matrix(data.zip(other, { _.zip(_, { _ + _ }) }))
+        var result = Matrix(rows, cols)
 
         for (row in 0..Math.min(rows, other.rows)) {
             for (col in 0..Math.min(cols, other.cols)) {
@@ -142,8 +142,8 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
     public subtract(Matrix other, Bool allowUnequalDimensions = false) -> Matrix {
         if (!allowUnequalDimensions) checkUnequalDimensions(other)
 
-        //return new Matrix(data.zip(other, { _.zip(_, { _ - _ }) }))
-        let result = new Matrix(rows, cols)
+        //return Matrix(data.zip(other, { _.zip(_, { _ - _ }) }))
+        let result = Matrix(rows, cols)
 
         for (row in 0..Math.min(rows, other.rows)) {
             for (col in 0..Math.min(cols, other.cols)) {
@@ -159,22 +159,22 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
 
     checkUnequalDimensions(Matrix other) {
         if (rows != other.rows || cols != other.cols)
-            throw new InvalidArgumentException("The matrices' sizes must be equal to perform this operation")
+            throw InvalidArgumentException("The matrices' sizes must be equal to perform this operation")
     }
 
     public multiply(Matrix other) -> Matrix {
         if (cols != other.rows)
-            throw new InvalidArgumentException("Matrix with dimensions #{rows}x#{cols} cannot be multiplied with
+            throw InvalidArgumentException("Matrix with dimensions #{rows}x#{cols} cannot be multiplied with
                                                 matrix with dimensions #{other.rows}x#{other.cols}. #cols != #other.rows")
 
-        /*return new Matrix(
+        /*return Matrix(
             transpose().data.map((outRow, outR) => {
                 return other.data.map((row, r) => {
                     outR
                 })
             }))*/
 
-        let result = new Matrix(rows, other.cols)
+        let result = Matrix(rows, other.cols)
 
         result.data.forEach((outRow, outR) => {
             data.forEach((row, r) => {
@@ -188,7 +188,7 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
     }
 
     public transpose() -> Matrix {
-        let result = new Matrix(cols, rows)
+        let result = Matrix(cols, rows)
 
         data.forEach((row, r) => {
             for (c in 0..cols) {
@@ -200,7 +200,7 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
     }
 
     public determinant() -> Double => determinant(data) {
-        if (!isSquare) throw new InvalidArgumentException("Matrix must be square to calculate the determinant")
+        if (!isSquare) throw InvalidArgumentException("Matrix must be square to calculate the determinant")
     }
 
     public static determinant(Double[][] data) -> Double {

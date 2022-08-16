@@ -4,7 +4,7 @@ class NumericTree {
     NumericOperation root
 
     public construct(String statement) {
-        root = new NumericOperation(statement)
+        root = NumericOperation(statement)
     }
 
     public toString() => "#root"
