@@ -1,9 +1,9 @@
-package "flatlang/math"
+package flatlang/math
 
-import "flatlang/operators/MultiplyOperator"
-import "flatlang/operators/PlusOperator"
-import "flatlang/exception/InvalidArgumentException"
-import "flatlang/exception/InvalidOperationException"
+import flatlang/operators/MultiplyOperator
+import flatlang/operators/PlusOperator
+import flatlang/exception/InvalidArgumentException
+import flatlang/exception/InvalidOperationException
 
 [AutoFinal]
 class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {

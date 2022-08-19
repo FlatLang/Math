@@ -1,4 +1,4 @@
-package "flatlang/math"
+package flatlang/math
 
 class Vector {
   visible Double magnitude => Math.sqrt(data.sum(n => n * n))

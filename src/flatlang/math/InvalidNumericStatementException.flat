@@ -1,4 +1,4 @@
-package "flatlang/math"
+package flatlang/math
 
 class InvalidNumericStatementException extends Exception {
   public construct(String message) => super(message)

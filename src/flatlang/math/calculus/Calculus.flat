@@ -1,6 +1,6 @@
-package "flatlang/math/calculus"
+package flatlang/math/calculus
 
-import "flatlang/math/NumericStatement"
+import flatlang/math/NumericStatement
 
 class Calculus {
   public static derivative(NumericStatement statement) -> NumericStatement {

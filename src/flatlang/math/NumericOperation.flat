@@ -1,7 +1,7 @@
-package "flatlang/math"
+package flatlang/math
 
-import "flatlang/datastruct/Bounds"
-import "flatlang/datastruct/Tuple2"
+import flatlang/datastruct/Bounds
+import flatlang/datastruct/Tuple2
 
 class NumericOperation extends NumericOperand<Object> {
   var NumericOperand leftOperand

@@ -1,6 +1,6 @@
-package "flatlang/math/logic"
+package flatlang/math/logic
 
-import "flatlang/math/Statement"
+import flatlang/math/Statement
 
 class LogicalStatement extends Statement {
   StatementComponent[] components

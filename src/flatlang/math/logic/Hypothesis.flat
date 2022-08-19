@@ -1,4 +1,4 @@
-package "flatlang/math/logic"
+package flatlang/math/logic
 
 class Hypothesis extends LogicalStatement {
   public construct(String statement) => super(statement)

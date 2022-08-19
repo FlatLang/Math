@@ -1,4 +1,4 @@
-package "flatlang/math"
+package flatlang/math
 
 class Vector3D extends Vector {
   public Double x <=> data[0]

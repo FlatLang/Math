@@ -1,4 +1,4 @@
-package "flatlang/math/logic"
+package flatlang/math/logic
 
 class StatementComponent {
 
