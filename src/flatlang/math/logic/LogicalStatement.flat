@@ -3,11 +3,11 @@ package "flatlang/math/logic"
 import "flatlang/math/Statement"
 
 class LogicalStatement extends Statement {
-    StatementComponent[] components
+  StatementComponent[] components
 
-    public construct(private String statement) {
-        components = Array()
-    }
+  public construct(private String statement) {
+    components = Array()
+  }
 
-    public toString() => statement
+  public toString() => statement
 }

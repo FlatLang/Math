@@ -3,151 +3,151 @@ package "flatlang/math/logic"
 import "flatlang/datastruct/Bounds"
 
 class WFF {
-    var Hypothesis[]      hypotheses
+  var Hypothesis[]    hypotheses
 
-    var Conclusion        conclusion
+  var Conclusion    conclusion
 
-    static Char[]     whitespace = [ ' ', '\t', '\n', '\r' ]
+  static Char[]   whitespace = [ ' ', '\t', '\n', '\r' ]
 
-    public construct(private var String wff, private StatementLetter[] letters) {
-        wff = wff.trim()
+  public construct(private var String wff, private StatementLetter[] letters) {
+    wff = wff.trim()
 
-        hypotheses = Array()
+    hypotheses = Array()
 
-        decodeFormula()
+    decodeFormula()
+  }
+
+  decodeFormula() {
+    StatementGroup<Conclusion> conclusionGroup = searchForConclusion(wff)
+
+    if (!conclusionGroup) {
+      throw InvalidFormulaException("No valid conclusion found")
     }
 
-    decodeFormula() {
-        StatementGroup<Conclusion> conclusionGroup = searchForConclusion(wff)
+    Conclusion conclusion = conclusionGroup.statement
 
-        if (!conclusionGroup) {
-            throw InvalidFormulaException("No valid conclusion found")
-        }
+    // Console.writeLine("Conclusion: " + conclusion)
 
-        Conclusion conclusion = conclusionGroup.statement
+    wff = conclusionGroup.bounds.extractPreString(wff)
 
-        // Console.writeLine("Conclusion: " + conclusion)
+    StatementGroup<Hypothesis>[] statements = decodeHypotheses(wff)
 
-        wff = conclusionGroup.bounds.extractPreString(wff)
+    for (i in 0..statements.count) {
+      StatementGroup<Hypothesis> group = statements.get(i)
 
-        StatementGroup<Hypothesis>[] statements = decodeHypotheses(wff)
+      hypotheses.add(group.statement)
+    }
+    for (n in 0..hypotheses.count) {
+      // Console.writeLine(hypotheses.get(n))
+    }
+  }
 
-        for (i in 0..statements.count) {
-            StatementGroup<Hypothesis> group = statements.get(i)
+  searchForConclusion(String wff) -> StatementGroup<Conclusion> {
+    Int index = wff.lastIndexOf("->")
 
-            hypotheses.add(group.statement)
-        }
-        for (n in 0..hypotheses.count) {
-            // Console.writeLine(hypotheses.get(n))
-        }
+    if (index < 0) {
+      return null
     }
 
-    searchForConclusion(String wff) -> StatementGroup<Conclusion> {
-        Int index = wff.lastIndexOf("->")
-
-        if (index < 0) {
-            return null
-        }
-
-        if (wff.chars.last == ')') {
-            Int first = findEndingMatch(wff, '(', ')', wff.count - 1, -1)
+    if (wff.chars.last == ')') {
+      Int first = findEndingMatch(wff, '(', ')', wff.count - 1, -1)
 
 
-        }
-
-        let conclusionStart = nextNonWhitespaceIndex(wff, index + 2, 1)
-        let bounds = Bounds(conclusionStart, wff.count)
-        let conclusion = Conclusion(bounds.extractString(wff))
-
-        bounds.start = nextNonWhitespaceIndex(wff, index - 1, -1) + 1
-
-        return StatementGroup<Conclusion>(conclusion, bounds)
     }
 
-    decodeHypotheses(String wff) -> StatementGroup<Hypothesis>[] {
-        let list = StatementGroup<Hypothesis>[]
+    let conclusionStart = nextNonWhitespaceIndex(wff, index + 2, 1)
+    let bounds = Bounds(conclusionStart, wff.count)
+    let conclusion = Conclusion(bounds.extractString(wff))
 
-        var Int next = 0
-        var Int prev = 0
+    bounds.start = nextNonWhitespaceIndex(wff, index - 1, -1) + 1
 
-        var index = wff.indexOf("&")
+    return StatementGroup<Conclusion>(conclusion, bounds)
+  }
 
-        while (index >= 0) {
-            next = nextNonWhitespaceIndex(wff, index - 1, -1)
-            //next = nextWhitespaceIndex(wff, next + 1, 1)
+  decodeHypotheses(String wff) -> StatementGroup<Hypothesis>[] {
+    let list = StatementGroup<Hypothesis>[]
 
-            list.add(generateHypothesis(wff, prev, next + 1))
+    var Int next = 0
+    var Int prev = 0
 
-            prev = nextNonWhitespaceIndex(wff, index + 1, 1)
+    var index = wff.indexOf("&")
 
-            index = wff.indexOf("&", prev + 1)
-        }
+    while (index >= 0) {
+      next = nextNonWhitespaceIndex(wff, index - 1, -1)
+      //next = nextWhitespaceIndex(wff, next + 1, 1)
 
-        list.add(generateHypothesis(wff, prev, wff.count))
+      list.add(generateHypothesis(wff, prev, next + 1))
 
-        return list
+      prev = nextNonWhitespaceIndex(wff, index + 1, 1)
+
+      index = wff.indexOf("&", prev + 1)
     }
 
-    generateHypothesis(String wff, Int start, Int end) -> StatementGroup<Hypothesis> {
-        let bounds = Bounds(start, end)
-        let h = Hypothesis(bounds.extractString(wff))
+    list.add(generateHypothesis(wff, prev, wff.count))
 
-        return StatementGroup<Hypothesis>(h, bounds)
+    return list
+  }
+
+  generateHypothesis(String wff, Int start, Int end) -> StatementGroup<Hypothesis> {
+    let bounds = Bounds(start, end)
+    let h = Hypothesis(bounds.extractString(wff))
+
+    return StatementGroup<Hypothesis>(h, bounds)
+  }
+
+  searchForStatement(String wff) -> StatementGroup<Statement> => null {}
+
+  static nextNonWhitespaceIndex(String wff, Int index, Int direction) =>
+    nextWhitespaceIndex(wff, index, direction, true)
+
+  static nextWhitespaceIndex(String wff, Int index, Int direction) =>
+    nextWhitespaceIndex(wff, index, direction, false)
+
+  static nextWhitespaceIndex(String wff, Int index, Int direction, Bool opposite, Int defaultReturnValue = -1) -> Int => defaultReturnValue {
+    var i = index
+
+    while (i < wff.count && i >= 0) {
+      Char c = wff.chars[i]
+
+      if (whitespace.contains(c) != opposite) {
+        return i
+      }
+
+      i += direction
+    }
+  }
+
+  static containsChar(Char needle, Char[] chars) -> Bool => false {
+    for (i in 0..chars.count) {
+      if (needle == chars.data[i]) {
+        return true
+      }
+    }
+  }
+
+  static findEndingMatch(String wff, var Char start, var Char end, Int index, Int direction, Int defaultReturnValue = -1) -> Int => defaultReturnValue {
+    if (direction < 0) {
+      let temp = start
+      start = end
+      end = temp
     }
 
-    searchForStatement(String wff) -> StatementGroup<Statement> => null {}
+    var Int scope = 0
 
-    static nextNonWhitespaceIndex(String wff, Int index, Int direction) =>
-        nextWhitespaceIndex(wff, index, direction, true)
+    Int i = index
 
-    static nextWhitespaceIndex(String wff, Int index, Int direction) =>
-        nextWhitespaceIndex(wff, index, direction, false)
+    while (i < wff.count && i >= 0) {
+      Char c = wff.chars[i]
 
-    static nextWhitespaceIndex(String wff, Int index, Int direction, Bool opposite, Int defaultReturnValue = -1) -> Int => defaultReturnValue {
-        var i = index
+      match (c)
+        start => scope++
+        end => scope--
 
-        while (i < wff.count && i >= 0) {
-            Char c = wff.chars[i]
+      if (scope == 0) {
+        return i
+      }
 
-            if (whitespace.contains(c) != opposite) {
-                return i
-            }
-
-            i += direction
-        }
+      i += direction
     }
-
-    static containsChar(Char needle, Char[] chars) -> Bool => false {
-        for (i in 0..chars.count) {
-            if (needle == chars.data[i]) {
-                return true
-            }
-        }
-    }
-
-    static findEndingMatch(String wff, var Char start, var Char end, Int index, Int direction, Int defaultReturnValue = -1) -> Int => defaultReturnValue {
-        if (direction < 0) {
-            let temp = start
-            start = end
-            end = temp
-        }
-
-        var Int scope = 0
-
-        Int i = index
-
-        while (i < wff.count && i >= 0) {
-            Char c = wff.chars[i]
-
-            match (c)
-                start => scope++
-                end => scope--
-
-            if (scope == 0) {
-                return i
-            }
-
-            i += direction
-        }
-    }
+  }
 }

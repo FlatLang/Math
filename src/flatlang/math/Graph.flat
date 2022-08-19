@@ -4,60 +4,60 @@ import "flatlang/datastruct/ReversibleHashMap"
 import "flatlang/datastruct/Node"
 
 class Graph {
-    /*Matrix matrix
+  /*Matrix matrix
 
-    ReversibleHashMap<Node, Int> map
+  ReversibleHashMap<Node, Int> map
 
-    Int id
+  Int id
 
-    public construct() {
-        this(0)
+  public construct() {
+    this(0)
+  }
+
+  public construct(Int numNodes) {
+    this.id = 1
+
+    matrix = Matrix(numNodes, numNodes)
+  }
+  */
+  /**
+   *
+   *
+   * @return The ID of the added node.
+   */
+  /*public addNode(Number val) -> Node {
+    Node node = Node(val)
+
+    map.add(node, id++)
+
+    return node
+  }
+
+  public removeNode(Int id) -> Bool {
+    if (!map.containsValue(id)) {
+      return false
     }
 
-    public construct(Int numNodes) {
-        this.id = 1
+    map.removeByValue(id)
 
-        matrix = Matrix(numNodes, numNodes)
-    }
-    */
-    /**
-     *
-     *
-     * @return The ID of the added node.
-     */
-    /*public addNode(Number val) -> Node {
-        Node node = Node(val)
+    updateMatrix()
 
-        map.add(node, id++)
+    return true
+  }
 
-        return node
+  public removeNode(Node node) -> Bool {
+    if (!map.containsKey(node)) {
+      return false
     }
 
-    public removeNode(Int id) -> Bool {
-        if (!map.containsValue(id)) {
-            return false
-        }
+    map.remove(node)
 
-        map.removeByValue(id)
+    updateMatrix()
 
-        updateMatrix()
+    return true
+  }
 
-        return true
-    }
-
-    public removeNode(Node node) -> Bool {
-        if (!map.containsKey(node)) {
-            return false
-        }
-
-        map.remove(node)
-
-        updateMatrix()
-
-        return true
-    }
-
-    updateMatrix() {
-        map.size
-    }*/
+  updateMatrix() {
+    map.size
+  }*/
 }

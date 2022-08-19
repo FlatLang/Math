@@ -1,11 +1,11 @@
 package "flatlang/math"
 
 class NumericStatement extends Statement {
-    NumericTree tree
+  NumericTree tree
 
-    public construct(String statement) {
-        tree = NumericTree(statement.trim())
-    }
+  public construct(String statement) {
+    tree = NumericTree(statement.trim())
+  }
 
-    public toString() => "#tree"
+  public toString() => "#tree"
 }
