@@ -1,0 +1,7 @@
+package flat/math/logic
+
+import flat/exception/Exception
+
+class InvalidFormulaException extends Exception {
+  public construct(String message) => super(message)
+}

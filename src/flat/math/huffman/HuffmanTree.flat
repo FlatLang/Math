@@ -1,0 +1,7 @@
+package flat/math/huffman
+
+import flat/datastruct/Tree
+
+class HuffmanTree extends Tree {
+
+}

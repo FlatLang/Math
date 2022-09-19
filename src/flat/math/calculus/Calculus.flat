@@ -1,0 +1,9 @@
+package flat/math/calculus
+
+import flat/math/NumericStatement
+
+class Calculus {
+  public static derivative(NumericStatement statement) -> NumericStatement {
+    return null
+  }
+}

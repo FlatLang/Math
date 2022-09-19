@@ -1,0 +1,5 @@
+package flat/math/logic
+
+class LogicalConnective extends StatementComponent {
+
+}
