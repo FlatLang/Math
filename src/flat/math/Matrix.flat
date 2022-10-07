@@ -5,7 +5,6 @@ import flat/operators/PlusOperator
 import flat/exception/InvalidArgumentException
 import flat/exception/InvalidOperationException
 
-[AutoFinal]
 class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
   Double[][] data
 
