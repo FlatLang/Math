@@ -107,7 +107,7 @@ class NumericOperation extends NumericOperand<Object> {
   }
 
   static searchNextType(String str, Int start) -> Tuple2<Bounds, Int> {
-    Int[] operators = new Int[]
+    Int[] operators = Int[]
 
     var Int minIndex = Int.MAX_VALUE
     var Int minRank  = Int.MIN_VALUE
