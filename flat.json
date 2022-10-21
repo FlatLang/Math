@@ -10,7 +10,9 @@
   "sources": {
     "main": {
       "source": "src",
-      "dependencies": {}
+      "dependencies": {
+        "github:FlatLang/Datastruct": "master"
+      }
     },
     "test": {
       "mainClass": "flat/math/Math_TestSuite",
