@@ -9,9 +9,14 @@ class NumericOperation extends NumericOperand<Object> {
 
   String operator
 
-  static Int GROUPING = 1, EXPONENT = 2, MULTIPLICATION = 3,
-        DIVISION = 3, ADDITION = 4, SUBTRACTION = 4,
-        MAX = 5, INVALID = -1
+  static Int GROUPING = 1
+  static Int EXPONENT = 2
+  static Int MULTIPLICATION = 3
+  static Int DIVISION = 3
+  static Int ADDITION = 4
+  static Int SUBTRACTION = 4
+  static Int MAX = 5
+  static Int INVALID = -1
 
   static Int OPERATOR = 1
   static Char[] VALID_OPERATORS   = [ '-', '+', '!', '=', '%', '^', '*', '/', '>', '<', '[', ']', '(', ')' ]
