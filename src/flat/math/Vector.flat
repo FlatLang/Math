@@ -5,7 +5,7 @@ class Vector {
 
   visible Double[] data
 
-  public construct(Int size) => this(new Double[size])
+  public construct(Int size) => this(Array<Double>(size))
   public construct(visible Double[] data) {}
 
   public dotProduct(Vector other) => data.sum((x, i) => x * other.data[i])
