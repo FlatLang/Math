@@ -36,8 +36,6 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
 
       return true
     }
-
-    no set
   }
 
   public construct(Int order) => this(order, order)
