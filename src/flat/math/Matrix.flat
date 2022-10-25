@@ -44,7 +44,7 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
       throw InvalidArgumentException("Invalid matrix size #{rows}x#{cols}.
                         The number of rows and columns must both be positive.")
 
-    this(new Double[rows][cols])
+    this(Array<Array<Double>>(rows).map({ Array(cols) }))
   }
 
   public construct(private Double[][] data) {
@@ -55,7 +55,7 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
   public clone() => Matrix(rows, cols).add(this)
 
   public static identity(Int order) -> Matrix {
-    let data = new Double[order][order]
+    let data = Array<Array<Double>>(order).map({ Array(order) })
 
     for (i in 0..order) {
       data[i][i] = 1
@@ -211,7 +211,7 @@ class Matrix implements MultiplyOperator<Matrix, Matrix>, PlusOperator<Matrix> {
       det = data[0][0] * data[1][1] - data[1][0] * data[0][1]
     } else {
       for (j1 in 0..order) {
-        let m = new Double[order - 1][order - 1]
+        let m = Array<Array<Double>>(order - 1).map({ Array(order - 1) })
 
         for (i in 1..order) {
           var Int j2 = 0
