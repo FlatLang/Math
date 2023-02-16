@@ -1,7 +1,6 @@
 package flat/math
 
-import flat/datastruct/ReversibleHashMap
-import flat/datastruct/Node
+import flat/datastruct
 
 class Graph {
   /*Matrix matrix
