@@ -3,60 +3,60 @@ package flat/math
 import flat/datastruct
 
 class Graph {
-  /*Matrix matrix
+    /*Matrix matrix
 
-  ReversibleHashMap<Node, Int> map
+    ReversibleHashMap<Node, Int> map
 
-  Int id
+    Int id
 
-  public construct() {
-    this(0)
-  }
-
-  public construct(Int numNodes) {
-    this.id = 1
-
-    matrix = Matrix(numNodes, numNodes)
-  }
-  */
-  /**
-   *
-   *
-   * @return The ID of the added node.
-   */
-  /*public addNode(Number val) -> Node {
-    Node node = Node(val)
-
-    map.add(node, id++)
-
-    return node
-  }
-
-  public removeNode(Int id) -> Bool {
-    if (!map.containsValue(id)) {
-      return false
+    public construct() {
+        this(0)
     }
 
-    map.removeByValue(id)
+    public construct(Int numNodes) {
+        this.id = 1
 
-    updateMatrix()
+        matrix = Matrix(numNodes, numNodes)
+    }
+    */
+    /**
+     *
+     *
+     * @return The ID of the added node.
+     */
+    /*public addNode(Number val) -> Node {
+        Node node = Node(val)
 
-    return true
-  }
+        map.add(node, id++)
 
-  public removeNode(Node node) -> Bool {
-    if (!map.containsKey(node)) {
-      return false
+        return node
     }
 
-    map.remove(node)
+    public removeNode(Int id) -> Bool {
+        if (!map.containsValue(id)) {
+            return false
+        }
 
-    updateMatrix()
+        map.removeByValue(id)
 
-    return true
-  }
+        updateMatrix()
 
-  updateMatrix() {
-    map.size
-  }*/
+        return true
+    }
+
+    public removeNode(Node node) -> Bool {
+        if (!map.containsKey(node)) {
+            return false
+        }
+
+        map.remove(node)
+
+        updateMatrix()
+
+        return true
+    }
+
+    updateMatrix() {
+        map.size
+    }*/
 }

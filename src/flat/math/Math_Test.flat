@@ -1,9 +1,9 @@
 package flat/math
 
 testable class {
-  test `can create`() {
-    let value = Math()
+    test `can create`() {
+        let value = Math()
 
-    expect(value).toNotBe(null)
-  }
+        expect(value).toNotBe(null)
+    }
 }
